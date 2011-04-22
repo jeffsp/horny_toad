@@ -459,6 +459,41 @@ void test_transform3 (bool verbose)
     VERIFY (d == raster<int> (5, 5, 11));
 }
 
+void test_reflect (bool verbose)
+{
+    if (verbose)
+        clog << "reflect(0,10)=" << reflect (0, 10) << endl;
+    VERIFY (reflect (0, 10) == 0);
+    if (verbose)
+        clog << "reflect(-1,10)=" << reflect (-1, 10) << endl;
+    VERIFY (reflect (-1, 10) == 1);
+    if (verbose)
+        clog << "reflect(9,10)=" << reflect (9, 10) << endl;
+    VERIFY (reflect (9, 10) == 9);
+    if (verbose)
+        clog << "reflect(10,10)=" << reflect (10, 10) << endl;
+    VERIFY (reflect (10, 10) == 10);
+    if (verbose)
+        clog << "reflect(11,10)=" << reflect (11, 10) << endl;
+    VERIFY (reflect (11, 10) == 9);
+}
+
+void test_mirrored_dot_product (bool verbose)
+{
+    raster<int> p (100, 100, 1.0);
+    // create gaussian kernel
+    raster<double> g (10, 10, 1.0);
+    subscript_unary_function<double,gaussian_window> f (g.rows (), g.cols ());
+    f.stddev (1.0);
+    std::transform (g.begin (), g.end (), g.begin (), f);
+    if (verbose)
+        print2d (clog, g);
+    double x = mirrored_dot_product (g, p, 99, 99);
+    if (verbose)
+        clog << "x=" << x << endl;
+    VERIFY (x > 6);
+}
+
 int main (int argc, char **)
 {
     try
@@ -477,6 +512,8 @@ int main (int argc, char **)
         test_convolve (verbose);
         test_split3_join3 (verbose);
         test_transform3 (verbose);
+        test_reflect (verbose);
+        test_mirrored_dot_product (verbose);
 
         return 0;
     }

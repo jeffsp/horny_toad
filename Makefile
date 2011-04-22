@@ -25,7 +25,7 @@ TARGET=horny_toad
 .SUFFIXES:
 .PHONY: all check clean doc publish release
 
-QFLAGS="CONFIG+=debug"
+QFLAGS="CONFIG+=debug QMAKE_CXXFLAGS+=-Wno-write-strings"
 
 all:
 	$(MAKE) -C tests
