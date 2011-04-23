@@ -368,8 +368,8 @@ double mirrored_dot_product (const T &k, const U &p, int start_i, int start_j)
             int jj = reflect (start_j + j, p.cols () - 1);
             assert (i < k.rows ());
             assert (j < k.cols ());
-            assert (ii < static_cast<int> (p.rows ()));
-            assert (jj < static_cast<int> (p.cols ()));
+            assert (static_cast<size_t> (ii) < p.rows ());
+            assert (static_cast<size_t> (jj) < p.cols ());
             sum += k (i, j) * p (ii, jj);
         }
     }
