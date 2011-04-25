@@ -328,7 +328,7 @@ void rms_contrast_m (const T &img, const W &w, C &c, M &m)
     }
 }
 
-/// @brief reflect a number at 0 and some maximum
+/// @brief Reflect a number at 0 and some maximum
 /// @param i The number to reflect
 /// @param n The maximum
 /// @return The reflection of i
@@ -345,20 +345,20 @@ size_t reflect (int i, size_t n)
 }
 
 /// @brief Dot product a kernel and an image patch, mirroring if necessary
-/// @param S The subregion type
-/// @param K The kernel type
-/// @param T The image type
-/// @param img The image
-/// @param kernel A centered kernel
-/// @return The output values
-/// @note The subregion type must be compatible with the
-/// image subregion iterators (e.g.: jack_rabbit::subregion)
-/// @note The image type is independent of the kernel type
-/// (i.e.: unsigned char images work)
-/// @note The kernel type determines the returned type.
+/// @tparam T Kernel type
+/// @tparam U Image type
+/// @param k kernel
+/// @param p image
+/// @param start_i row,column offset within the image
+/// @param start_j
+/// @return The dot product
+///
+/// The kernel should have odd dimensions, and the kernel must be smaller than the image.
 template<typename T,typename U>
 double mirrored_dot_product (const T &k, const U &p, int start_i, int start_j)
 {
+    assert (k.rows () < p.rows ());
+    assert (k.cols () < p.cols ());
     double sum = 0.0;
     for (size_t i = 0; i < k.rows (); ++i)
     {

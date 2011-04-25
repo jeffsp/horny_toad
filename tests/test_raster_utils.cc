@@ -482,7 +482,7 @@ void test_mirrored_dot_product (bool verbose)
 {
     raster<int> p (100, 100, 1.0);
     // create gaussian kernel
-    raster<double> g (10, 10, 1.0);
+    raster<double> g (11, 11, 1.0);
     subscript_unary_function<double,gaussian_window> f (g.rows (), g.cols ());
     f.stddev (1.0);
     std::transform (g.begin (), g.end (), g.begin (), f);
@@ -492,6 +492,40 @@ void test_mirrored_dot_product (bool verbose)
     if (verbose)
         clog << "x=" << x << endl;
     VERIFY (x > 6);
+    raster<int> q (100, 200);
+    for (size_t i = 0; i < q.rows (); ++i)
+    for (size_t j = 0; j < q.cols (); ++j)
+        q (i, j) = i;
+    raster<int> h (17, 11, 1);
+    // mirror at the corners
+    int d1 = mirrored_dot_product (h, q, 0, 0);
+    if (verbose)
+        clog << "d1=" << d1 << endl;
+    int d2 = mirrored_dot_product (h, q, 1-h.rows (), 1-h.cols ());
+    if (verbose)
+        clog << "d2=" << d2 << endl;
+    VERIFY (d1 == d2);
+    d1 = mirrored_dot_product (h, q, 0, q.cols()-h.cols ());
+    if (verbose)
+        clog << "d1=" << d1 << endl;
+    d2 = mirrored_dot_product (h, q, 1-h.rows (), q.cols()-1);
+    if (verbose)
+        clog << "d2=" << d2 << endl;
+    VERIFY (d1 == d2);
+    d1 = mirrored_dot_product (h, q, q.rows()-h.rows(), 0);
+    if (verbose)
+        clog << "d1=" << d1 << endl;
+    d2 = mirrored_dot_product (h, q, q.rows()-1, 1-h.cols());
+    if (verbose)
+        clog << "d2=" << d2 << endl;
+    VERIFY (d1 == d2);
+    d1 = mirrored_dot_product (h, q, q.rows()-h.rows(), q.cols()-h.cols());
+    if (verbose)
+        clog << "d1=" << d1 << endl;
+    d2 = mirrored_dot_product (h, q, q.rows()-1, q.cols()-1);
+    if (verbose)
+        clog << "d2=" << d2 << endl;
+    VERIFY (d1 == d2);
 }
 
 int main (int argc, char **)
