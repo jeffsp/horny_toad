@@ -10,6 +10,7 @@
 #define RASTER_UTILS_H
 
 #include "pi.h"
+#include "jack_rabbit.h"
 #include <algorithm>
 #include <cassert>
 #include <cstdlib>
@@ -123,6 +124,67 @@ T crop (const T &p, size_t r1, size_t c1, size_t r2, size_t c2)
         for (size_t j = c1; j <= c2; ++j)
             r (i - r1, j - c1) = p (i, j);
     return r;
+}
+
+/// @brief Crop a portion from a raster
+/// @tparam T Image type
+/// @param p The raster
+/// @param c Pixels to crop
+template<typename T>
+T crop (const T &p, size_t c)
+{
+    return crop (p, c, c, p.rows () - c - 1, p.cols () - c - 1);
+}
+
+/// @brief Add a border to an image
+///
+/// @tparam T image type
+/// @param p The raster
+/// @param c Number of pixels to add
+///
+/// @return the bordered image
+template<typename T>
+T border (const T &p, unsigned c)
+{
+    T q (p.rows () + c * 2, p.cols () + c * 2);
+    jack_rabbit::subregion s = { c, c, p.rows (), p.cols () };
+    copy (p.begin (), p.end (), q.begin (s));
+    return q;
+}
+
+/// @brief Add a mirrored border to an image
+///
+/// @tparam T Image type
+/// @param p Image
+/// @param c Number of pixels to add
+///
+/// @return The mirror bordered image
+template<typename T>
+T mborder (const T &p, unsigned c)
+{
+    T q = border (p, c);
+    for (size_t i = 0; i < q.rows (); ++i)
+    {
+        size_t ii = i;
+        if (i < c)
+            ii = 2 * c - i;
+        else if (i >= q.rows () - c)
+            ii = (2 * q.rows () - i) - 2 * (c + 1);
+        for (size_t j = 0; j < q.cols (); ++j)
+        {
+            size_t jj = j;
+            if (j < c)
+                jj = 2 * c - j;
+            else if (j >= q.cols () - c)
+                jj = (2 * q.cols () - j) - 2 * (c + 1);
+            if (ii == i && jj == j)
+                continue;
+            assert (ii < q.rows ());
+            assert (jj < q.cols ());
+            q (i, j) = q (ii, jj);
+        }
+    }
+    return q;
 }
 
 /// @brief Compute the local mean at a subregion

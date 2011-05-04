@@ -480,7 +480,7 @@ void test_reflect (bool verbose)
 
 void test_mirrored_dot_product (bool verbose)
 {
-    raster<int> p (100, 100, 1.0);
+    raster<int> p (100, 100, 1);
     // create gaussian kernel
     raster<double> g (11, 11, 1.0);
     subscript_unary_function<double,gaussian_window> f (g.rows (), g.cols ());
@@ -528,6 +528,53 @@ void test_mirrored_dot_product (bool verbose)
     VERIFY (d1 == d2);
 }
 
+void test_crop (bool verbose)
+{
+    raster<int> p (9, 9);
+    for (size_t i = 0; i < p.rows (); ++i)
+        for (size_t j = 0; j < p.cols (); ++j)
+            p (i, j) = (i + 1) * 10 + (j + 1);
+    if (verbose)
+        print2d (clog, p);
+    raster<int> q = crop (p, 2, 3, 8, 7);
+    if (verbose)
+        print2d (clog, q);
+    VERIFY (q(0,0) == 34);
+    VERIFY (q(6,4) == 98);
+    q = crop (p, 2);
+    if (verbose)
+        print2d (clog, q);
+    VERIFY (q(0,0) == 33);
+    VERIFY (q(4,4) == 77);
+}
+
+void test_border (bool verbose)
+{
+    raster<int> p (3, 3);
+    for (size_t i = 0; i < p.rows (); ++i)
+        for (size_t j = 0; j < p.cols (); ++j)
+            p (i, j) = (i + 1) * 10 + (j + 1);
+    if (verbose)
+        print2d (clog, p);
+    raster<int> q = border (p, 2);
+    if (verbose)
+        print2d (clog, q);
+    VERIFY (q(0,0) == 0);
+    VERIFY (q(2,2) == 11);
+    VERIFY (q(4,4) == 33);
+    q = mborder (p, 2);
+    if (verbose)
+        print2d (clog, q);
+    VERIFY (q(0,0) == 33);
+    VERIFY (q(0,3) == 32);
+    VERIFY (q(3,0) == 23);
+    VERIFY (q(2,2) == 11);
+    VERIFY (q(4,4) == 33);
+    VERIFY (q(6,6) == 11);
+    VERIFY (q(3,6) == 21);
+    VERIFY (q(6,3) == 12);
+}
+
 int main (int argc, char **)
 {
     try
@@ -548,6 +595,8 @@ int main (int argc, char **)
         test_transform3 (verbose);
         test_reflect (verbose);
         test_mirrored_dot_product (verbose);
+        test_crop (verbose);
+        test_border (verbose);
 
         return 0;
     }
