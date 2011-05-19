@@ -448,7 +448,7 @@ double mirrored_dot_product (const T &k, const U &p, int start_i, int start_j)
 /// @note The subregion type must be compatible with the
 /// image subregion iterators (e.g.: jack_rabbit::subregion)
 /// @note The image type is independent of the kernel type
-/// (i.e.: unsigned char images work)
+/// (e.g.: unsigned char images work)
 /// @note The kernel type determines the returned type.
 template<typename S,typename K,typename T>
 K convolve (const T &img, const K &kernel)
