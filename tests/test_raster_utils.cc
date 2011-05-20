@@ -556,13 +556,13 @@ void test_border (bool verbose)
             p (i, j) = (i + 1) * 10 + (j + 1);
     if (verbose)
         print2d (clog, p);
-    raster<int> q = border (p, 2);
+    raster<int> q = border<subregion> (p, 2);
     if (verbose)
         print2d (clog, q);
     VERIFY (q(0,0) == 0);
     VERIFY (q(2,2) == 11);
     VERIFY (q(4,4) == 33);
-    q = mborder (p, 2);
+    q = mborder<subregion> (p, 2);
     if (verbose)
         print2d (clog, q);
     VERIFY (q(0,0) == 33);

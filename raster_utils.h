@@ -10,7 +10,6 @@
 #define RASTER_UTILS_H
 
 #include "pi.h"
-#include "jack_rabbit.h"
 #include <algorithm>
 #include <cassert>
 #include <cstdlib>
@@ -138,31 +137,33 @@ T crop (const T &p, size_t c)
 
 /// @brief Add a border to an image
 ///
+/// @tparam S subregion type
 /// @tparam T image type
 /// @param p The raster
 /// @param c Number of pixels to add
 ///
 /// @return the bordered image
-template<typename T>
+template<typename S,typename T>
 T border (const T &p, unsigned c)
 {
     T q (p.rows () + c * 2, p.cols () + c * 2);
-    jack_rabbit::subregion s = { c, c, p.rows (), p.cols () };
+    S s = { c, c, p.rows (), p.cols () };
     copy (p.begin (), p.end (), q.begin (s));
     return q;
 }
 
 /// @brief Add a mirrored border to an image
 ///
+/// @tparam S subregion type
 /// @tparam T Image type
 /// @param p Image
 /// @param c Number of pixels to add
 ///
 /// @return The mirror bordered image
-template<typename T>
+template<typename S,typename T>
 T mborder (const T &p, unsigned c)
 {
-    T q = border (p, c);
+    T q = border<S> (p, c);
     for (size_t i = 0; i < q.rows (); ++i)
     {
         size_t ii = i;
