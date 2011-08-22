@@ -22,7 +22,7 @@ void write_pnm_header (std::ostream &os, size_t w, size_t h, bool rgb = false, b
 {
     // Write a pnm header
     os << (rgb ? "P6" : "P5") << "\n";
-    os << "# jsp\n";
+    //os << "# jsp\n";
     os << w << ' ' << h << '\n';
     if (!bpp16)
     {

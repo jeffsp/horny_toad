@@ -146,6 +146,9 @@ inline void sRGBtoLab (unsigned char r,
 }
 
 // ITU.BT-709 HDTV studio production in Y'CbCr
+//
+// NOTE that these values are different than the standard for CRTs, ITU-R
+// BT.601, which uses the constants k_r=0.299, k_b=0.114
 template<typename Ty>
 inline Ty YCbCr709Y  (Ty r, Ty g, Ty b) { return   0.2215 * r + 0.7154 * g + 0.0721 * b; }
 template<typename Ty>
@@ -160,6 +163,9 @@ template<typename Ty>
 inline Ty YCbCr709B  (Ty y, Ty cb, Ty cr) { return  y + 1.8556 * cb + 0.0000 * cr; }
 
 // ITU.BT-709 HDTV studio production in Y'CbCr functors
+//
+// NOTE that these values are different than the standard for CRTs, ITU-R
+// BT.601, which uses the constants k_r=0.299, k_b=0.114
 template<typename R,typename T>
 struct YCbCr709YFunc {
 inline R operator()  (T r, T g, T b) { return   0.2215 * r + 0.7154 * g + 0.0721 * b; } };
