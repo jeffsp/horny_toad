@@ -150,17 +150,17 @@ inline void sRGBtoLab (unsigned char r,
 // NOTE that these values are different than the standard for CRTs, ITU-R
 // BT.601, which uses the constants k_r=0.299, k_b=0.114
 template<typename Ty>
-inline Ty YCbCr709Y  (Ty r, Ty g, Ty b) { return   0.2215 * r + 0.7154 * g + 0.0721 * b; }
+inline double YCbCr709Y  (Ty r, Ty g, Ty b) { return   0.2215 * r + 0.7154 * g + 0.0721 * b; }
 template<typename Ty>
-inline Ty YCbCr709Cb (Ty r, Ty g, Ty b) { return  -0.1145 * r - 0.3855 * g + 0.5000 * b; }
+inline double YCbCr709Cb (Ty r, Ty g, Ty b) { return  -0.1145 * r - 0.3855 * g + 0.5000 * b; }
 template<typename Ty>
-inline Ty YCbCr709Cr (Ty r, Ty g, Ty b) { return   0.5016 * r - 0.4556 * g - 0.0459 * b; }
+inline double YCbCr709Cr (Ty r, Ty g, Ty b) { return   0.5016 * r - 0.4556 * g - 0.0459 * b; }
 template<typename Ty>
-inline Ty YCbCr709R  (Ty y, Ty cb, Ty cr) { return  y + 0.0000 * cb + 1.5701 * cr; }
+inline double YCbCr709R  (Ty y, Ty cb, Ty cr) { return  y + 0.0000 * cb + 1.5701 * cr; }
 template<typename Ty>
-inline Ty YCbCr709G  (Ty y, Ty cb, Ty cr) { return  y - 0.1870 * cb - 0.4664 * cr; }
+inline double YCbCr709G  (Ty y, Ty cb, Ty cr) { return  y - 0.1870 * cb - 0.4664 * cr; }
 template<typename Ty>
-inline Ty YCbCr709B  (Ty y, Ty cb, Ty cr) { return  y + 1.8556 * cb + 0.0000 * cr; }
+inline double YCbCr709B  (Ty y, Ty cb, Ty cr) { return  y + 1.8556 * cb + 0.0000 * cr; }
 
 // ITU.BT-709 HDTV studio production in Y'CbCr functors
 //
@@ -188,17 +188,17 @@ inline R operator() (T y, T cb, T cr) { return  y + 1.8556 * cb + 0.0000 * cr; }
 
 // SMTPE-240M Y'PbPr
 template<typename Ty>
-inline Ty YPbPrY  (Ty r, Ty g, Ty b) { return  0.2122 * r + 0.7013 * g + 0.0865 * b; }
+inline double YPbPrY  (Ty r, Ty g, Ty b) { return  0.2122 * r + 0.7013 * g + 0.0865 * b; }
 template<typename Ty>
-inline Ty YPbPrPb (Ty r, Ty g, Ty b) { return -0.1162 * r - 0.3838 * g + 0.5000 * b; }
+inline double YPbPrPb (Ty r, Ty g, Ty b) { return -0.1162 * r - 0.3838 * g + 0.5000 * b; }
 template<typename Ty>
-inline Ty YPbPrPr (Ty r, Ty g, Ty b) { return  0.5000 * r - 0.4451 * g - 0.0549 * b; }
+inline double YPbPrPr (Ty r, Ty g, Ty b) { return  0.5000 * r - 0.4451 * g - 0.0549 * b; }
 template<typename Ty>
-inline Ty YPbPrR (Ty y, Ty pb, Ty pr) { return  y + 0.0000 * pb + 1.5756 * pr; }
+inline double YPbPrR (Ty y, Ty pb, Ty pr) { return  y + 0.0000 * pb + 1.5756 * pr; }
 template<typename Ty>
-inline Ty YPbPrG (Ty y, Ty pb, Ty pr) { return  y - 0.2253 * pb - 0.5000 * pr; }
+inline double YPbPrG (Ty y, Ty pb, Ty pr) { return  y - 0.2253 * pb - 0.5000 * pr; }
 template<typename Ty>
-inline Ty YPbPrB (Ty y, Ty pb, Ty pr) { return  y + 1.8270 * pb + 0.0000 * pr; }
+inline double YPbPrB (Ty y, Ty pb, Ty pr) { return  y + 1.8270 * pb + 0.0000 * pr; }
 
 } // namespace horny_toad
 
