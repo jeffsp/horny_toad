@@ -696,7 +696,7 @@ class gaussian_window : public centered<T>
 {
     public:
     gaussian_window (size_t rows, size_t cols)
-        : centered<T> ((cols - 1) / 2, (rows - 1) / 2)
+        : centered<double> ((cols - 1.0) / 2.0, (rows - 1.0) / 2.0)
         , stddev_squared_ (T ())
     {
         // Pick some arbitrary, non-zero value for stddev

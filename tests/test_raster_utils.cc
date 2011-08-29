@@ -178,6 +178,19 @@ void test_gaussian_window (bool verbose)
         transform (m.begin (), m.end (), m.begin (), bind2nd (multiplies<double> (), 255));
         //Display (m);
     }
+
+    {
+    if (verbose)
+        clog << "gaussian window" << endl;
+
+    raster<double> m (6, 6);
+    subscript_generator<double,gaussian_window> g (m.rows (), m.cols ());
+    g.stddev (0.85);
+    generate (m.begin (), m.end (), g);
+    if (verbose)
+        print2d (clog, m);
+    VERIFY (about_equal (m (2, 2), 0.707));
+    }
 }
 
 void test_mean (bool verbose)
