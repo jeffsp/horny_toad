@@ -11,6 +11,7 @@
 
 #include "about_equal.h"
 #include "argv.h"
+#include "bicubic.h"
 #include "color.h"
 #include "fft.h"
 #include "log2.h"
