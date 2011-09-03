@@ -9,3 +9,5 @@ EXTRA_SOURCES=../argv.cc
 LIBS=-lfftw3
 
 include ../../Makefile.tests
+
+run: check
