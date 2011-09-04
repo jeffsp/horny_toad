@@ -34,7 +34,8 @@ R fxy_dx (const T &p)
     R df (p.rows (), p.cols ());
     for (size_t i = 0; i + 2 < p.rows (); ++i)
         for (size_t j = 0; j + 2 < p.cols (); ++j)
-            df (i + 1, j + 1) = (p (i + 1, j + 2) - p (i + 1, j + 0)) / 2.0;
+            df (i + 1, j + 1) = (static_cast<typename R::value_type> (p (i + 1, j + 2))
+                - static_cast<typename R::value_type> (p (i + 1, j + 0))) / 2.0;
     return df;
 }
 
@@ -48,10 +49,11 @@ R fxy_dx (const T &p)
 template<typename R,typename T>
 R fxy_dy (const T &p)
 {
-    T df (p.rows (), p.cols ());
+    R df (p.rows (), p.cols ());
     for (size_t i = 0; i + 2 < p.rows (); ++i)
         for (size_t j = 0; j + 2 < p.cols (); ++j)
-            df (i + 1, j + 1) = (p (i + 2, j + 1) - p (i + 0, j + 1)) / 2.0;
+            df (i + 1, j + 1) = (static_cast<typename R::value_type> (p (i + 2, j + 1))
+                - static_cast<typename R::value_type> (p (i + 0, j + 1))) / 2.0;
     return df;
 }
 
@@ -65,10 +67,13 @@ R fxy_dy (const T &p)
 template<typename R,typename T>
 R fxy_dxy (const T &p)
 {
-    T df (p.rows (), p.cols ());
+    R df (p.rows (), p.cols ());
     for (size_t i = 0; i + 2 < p.rows (); ++i)
         for (size_t j = 0; j + 2 < p.cols (); ++j)
-            df (i + 1, j + 1) = (p (i + 2, j + 2) - p (i + 2, j + 0) - p (i + 0, j + 2) + p (i + 0, j + 0)) / 4.0;
+            df (i + 1, j + 1) = (static_cast<typename R::value_type> (p (i + 2, j + 2))
+                - static_cast<typename R::value_type> (p (i + 2, j + 0))
+                - static_cast<typename R::value_type> (p (i + 0, j + 2))
+                + static_cast<typename R::value_type> (p (i + 0, j + 0))) / 4.0;
     return df;
 }
 
@@ -102,28 +107,35 @@ typename U::value_type surface (T x, T y, const U &c)
 template<typename T>
 T get_coeffs (const T &x)
 {
-    /*
     const typename T::value_type A_inverse[256] = {
-        1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        -3, 3, 0, 0, -2, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        2, -2, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, -3, 3, 0, 0, -2, -1, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 2, -2, 0, 0, 1, 1, 0, 0,
-        -3, 0, 3, 0, 0, 0, 0, 0, -2, 0, -1, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, -3, 0, 3, 0, 0, 0, 0, 0, -2, 0, -1, 0,
-        9, -9, -9, 9, 6, 3, -6, -3, 6, -6, 3, -3, 4, 2, 2, 1,
-        -6, 6, 6, -6, -3, -3, 3, 3, -4, 4, -2, 2, -2, -2, -1, -1,
-        2, 0, -2, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 2, 0, -2, 0, 0, 0, 0, 0, 1, 0, 1, 0,
-        -6, 6, 6, -6, -4, -2, 4, 2, -3, 3, -3, 3, -2, -1, -2, -1,
-        4, -4, -4, 4, 2, 2, -2, -2, 2, -2, 2, -2, 1, 1, 1, 1
+         1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
+         0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
+        -3,  3,  0,  0, -2, -1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
+         2, -2,  0,  0,  1,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0,
+         0,  0,  0,  0,  0,  0,  0,  0, -3,  3,  0,  0, -2, -1,  0,  0,
+         0,  0,  0,  0,  0,  0,  0,  0,  2, -2,  0,  0,  1,  1,  0,  0,
+        -3,  0,  3,  0,  0,  0,  0,  0, -2,  0, -1,  0,  0,  0,  0,  0,
+         0,  0,  0,  0, -3,  0,  3,  0,  0,  0,  0,  0, -2,  0, -1,  0,
+         9, -9, -9,  9,  6,  3, -6, -3,  6, -6,  3, -3,  4,  2,  2,  1,
+        -6,  6,  6, -6, -3, -3,  3,  3, -4,  4, -2,  2, -2, -2, -1, -1,
+         2,  0, -2,  0,  0,  0,  0,  0,  1,  0,  1,  0,  0,  0,  0,  0,
+         0,  0,  0,  0,  2,  0, -2,  0,  0,  0,  0,  0,  1,  0,  1,  0,
+        -6,  6,  6, -6, -4, -2,  4,  2, -3,  3, -3,  3, -2, -1, -2, -1,
+         4, -4, -4,  4,  2,  2, -2, -2,  2, -2,  2, -2,  1,  1,  1,  1
     };
-    */
     assert (x.size () == 16);
     T c (x.size ());
+    for (size_t i = 0; i < 16; ++i)
+    {
+        for (size_t j = 0; j < 16; ++j)
+        {
+            size_t index = i * 16 + j;
+            assert (index < 256);
+            c[i] += A_inverse[index] * x[j];
+        }
+    }
     return c;
 }
 
@@ -155,6 +167,9 @@ typename U::value_type bicubic_interp (const T &p, const U &dx, const U &dy, con
     const unsigned j2 = j1 + 1;
     // get known function values of the linear equation: pixel values and three
     // derivatives at all four corners
+    //
+    // note that these are in column major order, so the return coefficients are
+    // in column major order
     std::vector<typename U::value_type> d (16);
     d[0] = p (i1, j1);
     d[1] = p (i2, j1);
@@ -175,7 +190,7 @@ typename U::value_type bicubic_interp (const T &p, const U &dx, const U &dy, con
     // solve for the coefficients
     std::vector<typename U::value_type> c = get_coeffs (d);
     // evaluate at the point
-    typename U::value_type v = surface (x, y, c);
+    typename U::value_type v = surface (fmod (x, 1.0), fmod (y, 1.0), c);
     return v;
 }
 
@@ -186,6 +201,7 @@ void bicubic_interp (const T &p, U &q)
     U dx = fxy_dx<U> (p);
     U dy = fxy_dy<U> (p);
     U dxy = fxy_dxy<U> (p);
+    print2d (std::clog, dxy);
     const double xscale = static_cast<double> (p.cols ()) / q.cols ();
     const double yscale = static_cast<double> (p.rows ()) / q.rows ();
     // for each point in q
