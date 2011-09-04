@@ -94,7 +94,7 @@ typename U::value_type surface (T x, T y, const U &c)
     typename U::value_type sum = 0.0;
     for (size_t i = 0; i < 4; ++i)
         for (size_t j = 0; j < 4; ++j)
-            sum += c[i * 4 + j] * std::pow (x, i) * std::pow (y, j);
+            sum += c[j * 4 + i] * std::pow (x, i) * std::pow (y, j);
     return sum;
 }
 
@@ -165,27 +165,25 @@ typename U::value_type bicubic_interp (const T &p, const U &dx, const U &dy, con
     const unsigned j1 = left - 1;
     const unsigned i2 = i1 + 1;
     const unsigned j2 = j1 + 1;
+    std::clog << i1 << " " << j1 << " " << i2 << " " << j2 << std::endl;
     // get known function values of the linear equation: pixel values and three
     // derivatives at all four corners
-    //
-    // note that these are in column major order, so the return coefficients are
-    // in column major order
     std::vector<typename U::value_type> d (16);
     d[0] = p (i1, j1);
-    d[1] = p (i2, j1);
-    d[2] = p (i1, j2);
+    d[1] = p (i1, j2);
+    d[2] = p (i2, j1);
     d[3] = p (i2, j2);
     d[4] = dx (i1, j1);
-    d[5] = dx (i2, j1);
-    d[6] = dx (i1, j2);
+    d[5] = dx (i1, j2);
+    d[6] = dx (i2, j1);
     d[7] = dx (i2, j2);
     d[8] = dy (i1, j1);
-    d[9] = dy (i2, j1);
-    d[10] = dy (i1, j2);
+    d[9] = dy (i1, j2);
+    d[10] = dy (i2, j1);
     d[11] = dy (i2, j2);
     d[12] = dxy (i1, j1);
-    d[13] = dxy (i2, j1);
-    d[14] = dxy (i1, j2);
+    d[13] = dxy (i1, j2);
+    d[14] = dxy (i2, j1);
     d[15] = dxy (i2, j2);
     // solve for the coefficients
     std::vector<typename U::value_type> c = get_coeffs (d);
@@ -201,7 +199,6 @@ void bicubic_interp (const T &p, U &q)
     U dx = fxy_dx<U> (p);
     U dy = fxy_dy<U> (p);
     U dxy = fxy_dxy<U> (p);
-    print2d (std::clog, dxy);
     const double xscale = static_cast<double> (p.cols ()) / q.cols ();
     const double yscale = static_cast<double> (p.rows ()) / q.rows ();
     // for each point in q
@@ -214,6 +211,12 @@ void bicubic_interp (const T &p, U &q)
             double y = (i + 0.5) * yscale;
             // interpolate the point
             q (i, j) = bicubic_interp (p, dx, dy, dxy, x, y);
+            if (i == 3 && j == 3)
+            {
+                std::clog << i << " " << j << std::endl;
+                std::clog << x << " " << y << std::endl;
+                std::clog << q (i, j) << std::endl;
+            }
         }
     }
 }
