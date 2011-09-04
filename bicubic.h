@@ -148,24 +148,20 @@ typename U::value_type bicubic_interp (const T &p, const U &dx, const U &dy, con
     assert (p.cols () == dx.cols ());
     assert (p.cols () == dy.cols ());
     assert (p.cols () == dxy.cols ());
-    // how many pixels in p are above/left the point x,y?
-    const unsigned above = y + 0.5;
-    const unsigned left = x + 0.5;
-    // if we are too near the image's edges, we can't interpolate
-    if (above < 2)
-        return 0;
-    if (left < 2)
-        return 0;
-    if (above + 2 > p.rows ())
-        return 0;
-    if (left + 2 > p.cols ())
-        return 0;
     // get the boundary indexes of p
-    const unsigned i1 = above - 1;
-    const unsigned j1 = left - 1;
+    const unsigned i1 = y;
+    const unsigned j1 = x;
     const unsigned i2 = i1 + 1;
     const unsigned j2 = j1 + 1;
-    std::clog << i1 << " " << j1 << " " << i2 << " " << j2 << std::endl;
+    // if we are too near the image's edges, we can't interpolate
+    if (i1 < 1)
+        return 0;
+    if (j1 < 1)
+        return 0;
+    if (i2 + 2 > p.rows ())
+        return 0;
+    if (j2 + 2 > p.cols ())
+        return 0;
     // get known function values of the linear equation: pixel values and three
     // derivatives at all four corners
     std::vector<typename U::value_type> d (16);
@@ -206,17 +202,11 @@ void bicubic_interp (const T &p, U &q)
     {
         for (size_t j = 0; j < q.cols (); ++j)
         {
-            // where does the center of the pixel align with pixels in p?
-            double x = (j + 0.5) * xscale;
-            double y = (i + 0.5) * yscale;
+            // where does the center of the pixel align with the centers of pixels in p?
+            double x = (j + 0.5) * xscale - 0.5;
+            double y = (i + 0.5) * yscale - 0.5;
             // interpolate the point
             q (i, j) = bicubic_interp (p, dx, dy, dxy, x, y);
-            if (i == 3 && j == 3)
-            {
-                std::clog << i << " " << j << std::endl;
-                std::clog << x << " " << y << std::endl;
-                std::clog << q (i, j) << std::endl;
-            }
         }
     }
 }

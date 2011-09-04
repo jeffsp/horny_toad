@@ -20,24 +20,42 @@ using namespace horny_toad;
 
 void test1 (bool verbose)
 {
-    raster<unsigned> m (5, 5, 255);
-    subscript_unary_function<double,gaussian_window> g (m.rows (), m.cols ());
-    g.stddev (m.rows () / 7.0);
-    transform (m.begin (), m.end (), m.begin (), g);
+    raster<unsigned> m1 (23, 23, 255);
+    subscript_unary_function<double,gaussian_window> g1 (m1.rows (), m1.cols ());
+    g1.stddev (m1.rows () / 7.0);
+    transform (m1.begin (), m1.end (), m1.begin (), g1);
     if (verbose)
-        print2d (clog, m);
-    raster<double> n (m.rows () * 2, m.cols () * 2);
-    bicubic_interp (m, n);
+        print2d (clog, m1);
+    raster<double> n (m1.rows () * 2, m1.cols () * 2);
+    bicubic_interp (m1, n);
     if (verbose)
         print2d (clog, n);
-    VERIFY (true);
+    raster<unsigned> m2 (m1.rows () * 2, m1.cols () * 2, 255);
+    subscript_unary_function<double,gaussian_window> g2 (m2.rows (), m2.cols ());
+    g2.stddev (m2.rows () / 7.0);
+    transform (m2.begin (), m2.end (), m2.begin (), g2);
+    if (verbose)
+        print2d (clog, m2);
+    int max_diff = 0;
+    for (size_t i = 3; i + 3 < n.rows (); ++i)
+    {
+        for (size_t j = 3; j + 3 < n.cols (); ++j)
+        {
+            int diff = abs (n (i, j) - m2 (i, j));
+            if (diff > max_diff)
+                max_diff = diff;
+        }
+    }
+    if (verbose)
+        clog << max_diff << endl;
+    VERIFY (max_diff < 1);
 }
 
 int main (int argc, char **)
 {
     try
     {
-        const bool verbose = (argc != 2);
+        const bool verbose = (argc != 1);
         test1 (verbose);
 
         return 0;
