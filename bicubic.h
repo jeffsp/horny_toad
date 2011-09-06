@@ -216,6 +216,7 @@ void bicubic_interp (const T &p, U &q)
     const double xscale = static_cast<double> (p.cols ()) / q.cols ();
     const double yscale = static_cast<double> (p.rows ()) / q.rows ();
     // for each point in q
+#pragma omp parallel for
     for (size_t i = 0; i < q.rows (); ++i)
     {
         for (size_t j = 0; j < q.cols (); ++j)
