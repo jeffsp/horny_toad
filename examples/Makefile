@@ -3,9 +3,16 @@
 
 CCFILES=$(shell ls -1 *.cc)
 TARGETS=$(basename $(CCFILES))
-INCLUDEPATH=..
-DEPENDPATH=..
+INCLUDEPATH=.. ../../jack_rabbit
+DEPENDPATH=.. ../../jack_rabbit
 EXTRA_SOURCES=../argv.cc
 LIBS=-lfftw3
 
 include ../../Makefile.examples
+
+run: all
+	-./minimal_example --help
+	./touch_example --help
+	./bicubic_example > tmp.pgm
+	display -resize 300% -filter point tmp.pgm
+	rm -f tmp.pgm

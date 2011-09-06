@@ -139,6 +139,18 @@ T get_coeffs (const T &x)
     return c;
 }
 
+/// @brief bicubic interpolation at a single point
+///
+/// @tparam T image type
+/// @tparam U derivative type
+/// @param p image
+/// @param dx df/dx
+/// @param dy df/dy
+/// @param dxy df/dxdy
+/// @param x point to interpolate
+/// @param y point to interpolate
+///
+/// @return interpolated image point value
 template<typename T,typename U>
 typename U::value_type bicubic_interp (const T &p, const U &dx, const U &dy, const U &dxy, double x, double y)
 {
@@ -188,6 +200,12 @@ typename U::value_type bicubic_interp (const T &p, const U &dx, const U &dy, con
     return v;
 }
 
+/// @brief interpolate the points in one image given another image
+///
+/// @tparam T type of input image
+/// @tparam U type of output image
+/// @param p input image
+/// @param q output image
 template<typename T,typename U>
 void bicubic_interp (const T &p, U &q)
 {
