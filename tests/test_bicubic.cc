@@ -36,12 +36,58 @@ void test1 (bool verbose)
     transform (m2.begin (), m2.end (), m2.begin (), g2);
     if (verbose)
         print2d (clog, m2);
-    int max_diff = 0;
+    double max_diff = 0;
     for (size_t i = 3; i + 3 < n.rows (); ++i)
     {
         for (size_t j = 3; j + 3 < n.cols (); ++j)
         {
-            int diff = abs (n (i, j) - m2 (i, j));
+            double diff = abs (n (i, j) - m2 (i, j));
+            if (diff > max_diff)
+                max_diff = diff;
+        }
+    }
+    if (verbose)
+        clog << max_diff << endl;
+    VERIFY (max_diff < 1);
+}
+
+void test2 (bool verbose)
+{
+    raster<unsigned> m1 (11, 11, 255);
+    subscript_unary_function<double,gaussian_window> g1 (m1.rows (), m1.cols ());
+    g1.stddev (m1.rows () / 4.0);
+    transform (m1.begin (), m1.end (), m1.begin (), g1);
+    if (verbose)
+        print2d (clog, m1);
+    raster<unsigned> m2 (m1.rows () - 1, m1.cols () - 1, 255);
+    subscript_unary_function<double,gaussian_window> g2 (m2.rows (), m2.cols ());
+    g2.stddev (m1.rows () / 4.0);
+    transform (m2.begin (), m2.end (), m2.begin (), g2);
+    if (verbose)
+        print2d (clog, m2);
+    raster<float> x (m2.rows (), m2.cols ());
+    raster<float> y (m2.rows (), m2.cols ());
+    // get x,y coordinates for points between each pixel
+    for (size_t i = 0; i < m2.rows (); ++i)
+    {
+        for (size_t j = 0; j < m2.cols (); ++j)
+        {
+            x (i, j) = j + 0.5;
+            y (i, j) = i + 0.5;
+        }
+    }
+    raster<float> n (m2.rows (), m2.cols ());
+    bicubic_interp (m1, x, y, n);
+    if (verbose)
+    {
+        print2d (clog, n);
+    }
+    double max_diff = 0;
+    for (size_t i = 3; i + 3 < n.rows (); ++i)
+    {
+        for (size_t j = 3; j + 3 < n.cols (); ++j)
+        {
+            double diff = abs (n (i, j) - m2 (i, j));
             if (diff > max_diff)
                 max_diff = diff;
         }
@@ -57,6 +103,7 @@ int main (int argc, char **)
     {
         const bool verbose = (argc != 1);
         test1 (verbose);
+        test2 (verbose);
 
         return 0;
     }

@@ -230,6 +230,29 @@ void bicubic_interp (const T &p, U &q)
     }
 }
 
+/// @brief interpolate values at specified coordinates given an image
+///
+/// @tparam T type of input image
+/// @tparam U coordinate type
+/// @param p input image
+/// @param x coordinates
+/// @param y coordinates
+/// @param q interpolated points
+template<typename T,typename U>
+void bicubic_interp (const T &p, const U &x, const U &y, U &q)
+{
+    assert (x.size () == y.size ());
+    assert (x.size () == q.size ());
+    // compute derivatives at each point of p
+    U dx = fxy_dx<U> (p);
+    U dy = fxy_dy<U> (p);
+    U dxy = fxy_dxy<U> (p);
+    // for each point
+#pragma omp parallel for
+    for (size_t i = 0; i < x.size (); ++i)
+        q[i] = bicubic_interp (p, dx, dy, dxy, x[i], y[i]);
+}
+
 } // namespace horny_toad
 
 #endif // BICUBIC_H
