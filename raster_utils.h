@@ -73,6 +73,7 @@ std::ostream& print2d (std::ostream &s, const T &m, int w, int p, char f)
 }
 
 /// @brief Read a 2d block from a stream
+/// @tparam T return type
 /// @param s The stream
 /// @return The block
 template<typename T>

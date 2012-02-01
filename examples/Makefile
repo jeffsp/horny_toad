@@ -6,7 +6,7 @@ TARGETS=$(basename $(CCFILES))
 INCLUDEPATH=.. ../../jack_rabbit
 DEPENDPATH=.. ../../jack_rabbit
 EXTRA_SOURCES=../argv.cc
-LIBS=-lfftw3
+LIBS=-lfftw3 -lgomp
 
 include ../../Makefile.examples
 

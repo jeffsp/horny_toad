@@ -97,6 +97,24 @@ void test2 (bool verbose)
     VERIFY (max_diff < 1);
 }
 
+void test3 (bool verbose)
+{
+    raster<unsigned> p (4, 4, 255);
+    subscript_unary_function<double,gaussian_window> g (p.rows (), p.cols ());
+    g.stddev (p.rows () / 4.0);
+    transform (p.begin (), p.end (), p.begin (), g);
+    if (verbose)
+        print2d (clog, p);
+    raster<float> x (1, 1, 1.5);
+    raster<float> y (1, 1, 1.5);
+    raster<float> q (1);
+    bicubic_interp (p, x, y, q);
+    if (verbose)
+    {
+        clog << x[0] << "," << y[0] << " = " << q[0] << endl;
+    }
+}
+
 int main (int argc, char **)
 {
     try
@@ -104,6 +122,7 @@ int main (int argc, char **)
         const bool verbose = (argc != 1);
         test1 (verbose);
         test2 (verbose);
+        test3 (verbose);
 
         return 0;
     }
