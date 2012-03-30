@@ -25,9 +25,11 @@
 
 all:
 	$(MAKE) -C rms
+	$(MAKE) -C foveate
 
 check:
 	$(MAKE) -C rms check
 
 clean:
 	$(MAKE) -C rms clean
+	$(MAKE) -C foveate clean
