@@ -158,7 +158,7 @@ T border (const T &p, unsigned c)
 /// @tparam T image type
 /// @param p The raster
 ///
-/// @return the flipped image
+/// @return the flipped raster
 template<typename T>
 T fliplr (const T &p)
 {
@@ -166,6 +166,22 @@ T fliplr (const T &p)
     for (size_t i = 0; i < p.rows (); ++i)
         for (size_t j = 0; j < p.cols (); ++j)
             q (i, j) = p (i, p.cols () - 1 - j);
+    return q;
+}
+
+/// @brief Transpose a raster
+///
+/// @tparam T image type
+/// @param p The raster
+///
+/// @return the transposed raster
+template<typename T>
+T transpose (const T &p)
+{
+    T q (p.cols (), p.rows ());
+    for (size_t i = 0; i < p.rows (); ++i)
+        for (size_t j = 0; j < p.cols (); ++j)
+            q (j, i) = p (i, j);
     return q;
 }
 

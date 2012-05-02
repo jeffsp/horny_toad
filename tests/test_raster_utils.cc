@@ -616,6 +616,29 @@ void test_flip (bool verbose)
     }
 }
 
+void test_transpose (bool verbose)
+{
+    const size_t N = 10;
+    for (size_t n = 0; n < rand (N); ++n)
+    {
+        const size_t R = rand (N) + N;
+        const size_t C = rand (N) + N;
+        raster<int> p (R, C);
+        raster<int> q (C, R);
+        for (size_t i = 0; i < p.rows (); ++i)
+            for (size_t j = 0; j < p.cols (); ++j)
+                p (i, j) = q (j, i) = i * p.cols () + j;
+        if (verbose)
+            print2d (clog, p);
+        if (verbose)
+            print2d (clog, q);
+        q = transpose (q);
+        if (verbose)
+            print2d (clog, q);
+        VERIFY (p == q);
+    }
+}
+
 int main (int argc, char **)
 {
     try
@@ -639,6 +662,7 @@ int main (int argc, char **)
         test_crop (verbose);
         test_border (verbose);
         test_flip (verbose);
+        test_transpose (verbose);
 
         return 0;
     }
