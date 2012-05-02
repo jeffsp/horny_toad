@@ -588,6 +588,34 @@ void test_border (bool verbose)
     VERIFY (q(6,3) == 12);
 }
 
+unsigned rand (unsigned n) { return rand () % n; }
+
+void test_flip (bool verbose)
+{
+    const size_t N = 10;
+    for (size_t n = 0; n < rand (N); ++n)
+    {
+        const size_t R = rand (N) + N;
+        const size_t C = rand (N) + N;
+        raster<int> p (R, C);
+        raster<int> q (R, C);
+        for (size_t i = 0; i < p.rows (); ++i)
+            for (size_t j = 0; j < p.cols (); ++j)
+                p (i, j) = i * p.cols () + j;
+        for (size_t i = 0; i < q.rows (); ++i)
+            for (size_t j = 0; j < q.cols (); ++j)
+                q (i, j) = i * q.cols () + q.cols () - j - 1;
+        if (verbose)
+            print2d (clog, p);
+        if (verbose)
+            print2d (clog, q);
+        q = fliplr (q);
+        if (verbose)
+            print2d (clog, q);
+        VERIFY (p == q);
+    }
+}
+
 int main (int argc, char **)
 {
     try
@@ -610,6 +638,7 @@ int main (int argc, char **)
         test_mirrored_dot_product (verbose);
         test_crop (verbose);
         test_border (verbose);
+        test_flip (verbose);
 
         return 0;
     }
