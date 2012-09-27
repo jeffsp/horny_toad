@@ -690,8 +690,8 @@ class raised_cos : public radial_cos<T>, public aperture<T>
         half_height_ = hh;
         T period = half_height_ * 4.0;
         min_aperture_.radius (aperture<T>::radius () - half_height_ * 2);
-        frequency (1 / period);
-        phase (2.0 * PI () * (min_aperture_.radius () / period));
+        radial_cos<T>::frequency (1 / period);
+        radial_cos<T>::phase (2.0 * PI () * (min_aperture_.radius () / period));
     }
     void center_x (T cx)
     {

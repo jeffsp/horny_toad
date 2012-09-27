@@ -10,6 +10,7 @@
 #define STATISTICS_H
 
 #include <algorithm>
+#include <numeric>
 #include <cassert>
 
 namespace horny_toad
@@ -19,7 +20,7 @@ namespace horny_toad
 template<typename T>
 double mean (const T &x)
 {
-    return accumulate (x.begin (), x.end (), 0.0) / x.size ();
+    return std::accumulate (x.begin (), x.end (), 0.0) / x.size ();
 }
 
 // Compute unbiased estimate of the variance

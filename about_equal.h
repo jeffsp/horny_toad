@@ -9,6 +9,8 @@
 #ifndef ABOUT_EQUAL_H
 #define ABOUT_EQUAL_H
 
+#include <cmath>
+
 namespace horny_toad
 {
 

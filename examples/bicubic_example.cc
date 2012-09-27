@@ -28,7 +28,7 @@ int main ()
         raster<double> q (M * SCALE, N * SCALE);
         bicubic_interp (p, q);
         raster<unsigned char> u (q.rows (), q.cols ());
-        transform (q.begin (), q.end (), q.begin (), round<double>);
+        transform (q.begin (), q.end (), q.begin (), round);
         transform (q.begin (), q.end (), u.begin (), clip_functor<int> (0, 255));
 
         raster<unsigned char> ind (u.rows () - 3 * SCALE * 2, u.cols () - 3 * SCALE * 2);

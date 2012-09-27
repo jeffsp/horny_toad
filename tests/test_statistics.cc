@@ -10,6 +10,7 @@
 #include "statistics.h"
 #include "verify.h"
 #include <iostream>
+#include <vector>
 
 using namespace std;
 using namespace horny_toad;
