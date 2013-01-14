@@ -1,10 +1,8 @@
-// Test Utilities
-//
-// Copyright (C) 2007
-// Center for Perceptual Systems
-// University of Texas at Austin
-//
-// jsp Tue Jun 24 15:24:56 CDT 2008
+/// @file test_pnm.cc
+/// @brief test utilities
+/// @author Jeff Perry <jeffsp@gmail.com>
+/// @version 1.0
+/// @date 2013-01-14
 
 #include "pnm.h"
 #include "verify.h"

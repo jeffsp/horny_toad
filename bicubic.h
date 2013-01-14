@@ -1,12 +1,10 @@
-// Bicubic Interpolation
-//
-// This came straight out of http://en.wikipedia.org/wiki/Bicubic_interpolation
-//
-// Copyright (C) 2004-2011
-// Center for Perceptual Systems
-// University of Texas at Austin
-//
-// contact: jeffsp@gmail.com
+/// @file bicubic.h
+/// @brief bicubic interp
+/// @author Jeff Perry <jeffsp@gmail.com>
+/// @version 1.0
+/// @date 2013-01-14
+///
+/// This came straight out of http://en.wikipedia.org/wiki/Bicubic_interpolation
 
 #ifndef BICUBIC_H
 #define BICUBIC_H

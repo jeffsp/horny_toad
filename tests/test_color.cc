@@ -1,10 +1,8 @@
-// Test color code
-//
-// Copyright (C) 2006
-// Center for Perceptual Systems
-// University of Texas at Austin
-//
-// jsp Mon Dec 18 16:13:14 CST 2006
+/// @file test_color.cc
+/// @brief test color
+/// @author Jeff Perry <jeffsp@gmail.com>
+/// @version 1.0
+/// @date 2013-01-14
 
 #include "verify.h"
 #include "color.h"

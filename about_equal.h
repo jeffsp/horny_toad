@@ -1,10 +1,8 @@
-// About Equal
-//
-// Copyright (C) 2004-2011
-// Center for Perceptual Systems
-// University of Texas at Austin
-//
-// contact: jeffsp@gmail.com
+/// @file about_equal.h
+/// @brief about equal
+/// @author Jeff Perry <jeffsp@gmail.com>
+/// @version 1.0
+/// @date 2013-01-14
 
 #ifndef ABOUT_EQUAL_H
 #define ABOUT_EQUAL_H

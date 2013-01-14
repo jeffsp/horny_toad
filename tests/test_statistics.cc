@@ -1,10 +1,8 @@
-// Test Stats Utilities
-//
-// Copyright (C) 2004-2011
-// Center for Perceptual Systems
-// University of Texas at Austin
-//
-// contact: jeffsp@gmail.com
+/// @file test_statistics.cc
+/// @brief test stats
+/// @author Jeff Perry <jeffsp@gmail.com>
+/// @version 1.0
+/// @date 2013-01-14
 
 #include "about_equal.h"
 #include "statistics.h"

@@ -1,8 +1,8 @@
-// Test Utilities
-//
-// Copyright (C) 2007 Jeffrey S. Perry
-//
-// contact: jeffsp@gmail.com
+/// @file test_verify.cc
+/// @brief test verify
+/// @author Jeff Perry <jeffsp@gmail.com>
+/// @version 1.0
+/// @date 2013-01-14
 
 #include "verify.h"
 #include <fstream>

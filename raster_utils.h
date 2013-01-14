@@ -1,10 +1,8 @@
-// Raster Utilities
-//
-// Copyright (C) 2004-2011
-// Center for Perceptual Systems
-// University of Texas at Austin
-//
-// contact: jeffsp@gmail.com
+/// @file raster_utils.h
+/// @brief raster utilities
+/// @author Jeff Perry <jeffsp@gmail.com>
+/// @version 1.0
+/// @date 2013-01-14
 
 #ifndef RASTER_UTILS_H
 #define RASTER_UTILS_H

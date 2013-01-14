@@ -26,10 +26,13 @@
 all:
 	$(MAKE) -C rms
 	$(MAKE) -C foveate
+	$(MAKE) -C reduce
 
 check:
 	$(MAKE) -C rms check
+	$(MAKE) -C reduce check
 
 clean:
 	$(MAKE) -C rms clean
 	$(MAKE) -C foveate clean
+	$(MAKE) -C reduce clean

@@ -16,3 +16,16 @@ run: all
 	./bicubic_example > tmp.pgm
 	display -resize 300% -filter point tmp.pgm
 	rm -f tmp.pgm
+
+doc:
+	./pyramid_example0
+	./pyramid_example1
+	# Convert for use in documentation
+	convert pyramid_example1_grayscale.pgm pyramid_example1_grayscale.png
+	convert pyramid_example1_color.ppm pyramid_example1_color.png
+	-display pyramid_example1_grayscale.png
+	-display pyramid_example1_color.png
+
+clean_images:
+	rm -f *_example*.png
+	rm -f *_example*.p?m

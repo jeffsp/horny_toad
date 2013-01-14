@@ -1,10 +1,8 @@
-// Clip
-//
-// Copyright (C) 2004-2011
-// Center for Perceptual Systems
-// University of Texas at Austin
-//
-// contact: jeffsp@gmail.com
+/// @file clip.h
+/// @brief clip
+/// @author Jeff Perry <jeffsp@gmail.com>
+/// @version 1.0
+/// @date 2013-01-14
 
 #ifndef CLIP_H
 #define CLIP_H

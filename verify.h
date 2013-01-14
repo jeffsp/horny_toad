@@ -1,10 +1,8 @@
-// Verify that a statement is true at runtime
-//
-// Copyright (C) 2004-2011
-// Center for Perceptual Systems
-// University of Texas at Austin
-//
-// contact: jeffsp@gmail.com
+/// @file verify.h
+/// @brief like assert(), but with debug off
+/// @author Jeff Perry <jeffsp@gmail.com>
+/// @version 1.0
+/// @date 2013-01-14
 
 #ifndef VERIFY_H
 #define VERIFY_H

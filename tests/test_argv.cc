@@ -1,8 +1,8 @@
-// Test program options
-//
-// Copyright (C) 2003 Jeffrey S. Perry
-//
-// contact: jeffsp@gmail.com
+/// @file test_argv.cc
+/// @brief test program options
+/// @author Jeff Perry <jeffsp@gmail.com>
+/// @version 1.0
+/// @date 2013-01-14
 
 #include "argv.h"
 #include "verify.h"

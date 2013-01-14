@@ -1,8 +1,8 @@
-// Test about_equal
-//
-// Copyright (C) 2008 Jeffrey S. Perry
-//
-// contact: jeffsp@gmail.com
+/// @file test_about_equal.cc
+/// @brief test about_equal
+/// @author Jeff Perry <jeffsp@gmail.com>
+/// @version 1.0
+/// @date 2013-01-14
 
 #include "about_equal.h"
 #include "pi.h"

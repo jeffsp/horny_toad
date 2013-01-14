@@ -1,8 +1,8 @@
-// Test Polar
-//
-// Copyright (C) 2008 Jeffrey S. Perry
-//
-// contact: jeffsp@gmail.com
+/// @file test_polar.cc
+/// @brief test polar
+/// @author Jeff Perry <jeffsp@gmail.com>
+/// @version 1.0
+/// @date 2013-01-14
 
 #include "about_equal.h"
 #include "pi.h"

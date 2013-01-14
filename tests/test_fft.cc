@@ -1,8 +1,8 @@
-// Test FFT
-//
-// Copyright (C) 2004 Jeffrey S. Perry
-//
-// contact: jeffsp@gmail.com
+/// @file test_fft.cc
+/// @brief test fft
+/// @author Jeff Perry <jeffsp@gmail.com>
+/// @version 1.0
+/// @date 2013-01-14
 
 #include "fft.h"
 #include "verify.h"

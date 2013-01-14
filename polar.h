@@ -1,10 +1,8 @@
-// Polar Utilities
-//
-// Copyright (C) 2004-2011
-// Center for Perceptual Systems
-// University of Texas at Austin
-//
-// contact: jeffsp@gmail.com
+/// @file polar.h
+/// @brief polar coords
+/// @author Jeff Perry <jeffsp@gmail.com>
+/// @version 1.0
+/// @date 2013-01-14
 
 #ifndef POLAR_H
 #define POLAR_H
