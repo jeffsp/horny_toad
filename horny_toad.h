@@ -28,6 +28,7 @@
 #include "polar.h"
 #include "pyramid.h"
 #include "raster_utils.h"
+#include "readlines.h"
 #include "rect.h"
 #include "statistics.h"
 #include "superpixel.h"
