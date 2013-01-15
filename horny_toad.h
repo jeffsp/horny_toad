@@ -22,6 +22,7 @@
 #include "fft.h"
 #include "foveator.h"
 #include "log2.h"
+#include "noise.h"
 #include "pi.h"
 #include "pnm.h"
 #include "polar.h"
