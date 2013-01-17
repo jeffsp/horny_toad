@@ -21,6 +21,7 @@
 #include "color.h"
 #include "fft.h"
 #include "foveator.h"
+#include "gamma.h"
 #include "log2.h"
 #include "noise.h"
 #include "pi.h"
