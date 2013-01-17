@@ -23,6 +23,7 @@
 #include "foveator.h"
 #include "gamma.h"
 #include "log2.h"
+#include "mse.h"
 #include "noise.h"
 #include "pi.h"
 #include "pnm.h"
