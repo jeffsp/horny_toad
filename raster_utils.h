@@ -167,6 +167,22 @@ T fliplr (const T &p)
     return q;
 }
 
+/// @brief Flip a raster vertically
+///
+/// @tparam T image type
+/// @param p The raster
+///
+/// @return the flipped raster
+template<typename T>
+T flipud (const T &p)
+{
+    T q (p.rows (), p.cols ());
+    for (size_t i = 0; i < p.rows (); ++i)
+        for (size_t j = 0; j < p.cols (); ++j)
+            q (i, j) = p (p.rows () - 1 - i, j);
+    return q;
+}
+
 /// @brief Transpose a raster
 ///
 /// @tparam T image type
