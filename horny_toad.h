@@ -35,6 +35,7 @@
 #include "statistics.h"
 #include "superpixel.h"
 #include "timer.h"
+#include "tracer.h"
 #include "verify.h"
 
 #endif // HORNY_TOAD_H
