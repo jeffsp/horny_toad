@@ -624,6 +624,17 @@ void test_flip (bool verbose)
         if (verbose)
             print2d (clog, q);
         VERIFY (p == q);
+        for (size_t i = 0; i < q.rows (); ++i)
+            for (size_t j = 0; j < q.cols (); ++j)
+                q (i, j) = (q.rows () - i - 1) * q.cols () + (q.cols () - j - 1);
+        if (verbose)
+            print2d (clog, p);
+        if (verbose)
+            print2d (clog, q);
+        q = fliplrud (q);
+        if (verbose)
+            print2d (clog, q);
+        VERIFY (p == q);
     }
 }
 
