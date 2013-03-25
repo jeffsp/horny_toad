@@ -37,9 +37,9 @@ class tracer
     }
 #else
     public:
-    tracer(std::ostream &s, const std::string &file, const std::string &func, const int line) { }
+    tracer(std::ostream &, const std::string &, const std::string &, const int ) { }
     template <class T>
-    tracer &operator<<(const T &v) { return *this; }
+    tracer &operator<<(const T &) { return *this; }
     ~tracer() { }
 #endif
 };
