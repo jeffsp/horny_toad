@@ -5,7 +5,7 @@ CCFILES=$(shell ls -1 *.cc)
 TARGETS=$(basename $(CCFILES))
 INCLUDEPATH=.. ../../jack_rabbit
 DEPENDPATH=.. ../../jack_rabbit
-EXTRA_SOURCES=../argv.cc
+EXTRA_SOURCES=
 LIBS=-lfftw3 -lgomp
 
 include ../../Makefile.tests

@@ -14,7 +14,6 @@
 #define HORNY_TOAD_H
 
 #include "about_equal.h"
-#include "argv.h"
 #include "bicubic.h"
 #include "blending_map.h"
 #include "clip.h"

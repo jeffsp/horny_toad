@@ -105,7 +105,7 @@ typename U::value_type surface (T x, T y, const U &c)
 template<typename T>
 T get_coeffs (const T &x)
 {
-    const typename T::value_type A_inverse[256] = {
+    const int A_inverse[256] = {
          1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
          0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
         -3,  3,  0,  0, -2, -1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
