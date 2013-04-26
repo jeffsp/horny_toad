@@ -16,6 +16,7 @@
 #include "about_equal.h"
 #include "bicubic.h"
 #include "blending_map.h"
+#include "bresenham.h"
 #include "clip.h"
 #include "color.h"
 #include "fft.h"
