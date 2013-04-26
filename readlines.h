@@ -8,31 +8,24 @@
 #define READLINES_H
 
 #include <fstream>
-#include <vector>
 #include <stdexcept>
+#include <string>
+#include <vector>
 
 namespace horny_toad
 {
 
-/// @brief read newline delimited fields from an input stream
+/// @brief read newline delimited strings from an input stream
 ///
-/// @tparam T type of fields to extract
 /// @param s the input stream
 ///
-/// @return vector of Ts containing the fields
-template<typename T>
-std::vector<T> readlines (std::istream &s)
+/// @return vector of strings
+std::vector<std::string> readlines (std::istream &s)
 {
-    std::vector<T> lines;
-    T l;
-    for (;;) // ever
-    {
-        s >> l;
-        if (s)
-            lines.push_back (l);
-        else
-            break;
-    }
+    std::vector<std::string> lines;
+    std::string l;
+    while (std::getline (s, l))
+        lines.push_back (l);
     return lines;
 }
 
@@ -41,13 +34,48 @@ std::vector<T> readlines (std::istream &s)
 /// @param f the file
 ///
 /// @return vector of strings containing the lines
-template<typename T>
-std::vector<T> readlines (const char *fn)
+std::vector<std::string> readlines (const char *fn)
 {
     std::ifstream s (fn);
     if (!s)
         throw std::runtime_error ("could not open file");
-    return readlines<T> (s);
+    return readlines (s);
+}
+
+/// @brief read whitespace delimited fields from an input stream
+///
+/// @tparam T type of fields to extract
+/// @param s the input stream
+///
+/// @return vector of Ts containing the fields
+template<typename T>
+std::vector<T> readwords (std::istream &s)
+{
+    std::vector<T> words;
+    T l;
+    for (;;) // ever
+    {
+        s >> l;
+        if (s)
+            words.push_back (l);
+        else
+            break;
+    }
+    return words;
+}
+
+/// @brief read words from a file
+///
+/// @param f the file
+///
+/// @return vector of strings containing the words
+template<typename T>
+std::vector<T> readwords (const char *fn)
+{
+    std::ifstream s (fn);
+    if (!s)
+        throw std::runtime_error ("could not open file");
+    return readwords<T> (s);
 }
 
 } // namespace horny_toad
