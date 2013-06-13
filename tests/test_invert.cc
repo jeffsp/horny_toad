@@ -4,11 +4,7 @@
 /// @version 1.0
 /// @date 2013-06-12
 
-#include "about_equal.h"
-#include "invert.h"
-#include "raster.h"
-#include "raster_utils.h"
-#include "verify.h"
+#include "horny_toad.h"
 #include <iostream>
 
 using namespace std;

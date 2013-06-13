@@ -4,12 +4,7 @@
 /// @version 1.0
 /// @date 2013-06-13
 
-#include "about_equal.h"
-#include "invert.h"
-#include "mlr.h"
-#include "noise.h"
-#include "raster.h"
-#include "verify.h"
+#include "horny_toad.h"
 
 using namespace std;
 using namespace horny_toad;
