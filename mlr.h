@@ -8,7 +8,6 @@
 #define MLR_H
 
 #include "raster_utils.h"
-#include <stdexcept>
 
 namespace horny_toad
 {
