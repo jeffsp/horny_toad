@@ -25,7 +25,6 @@
 #include "invert.h"
 #include "log2.h"
 #include "mlr.h"
-#include "mlr_lapack.h"
 #include "mse.h"
 #include "noise.h"
 #include "pi.h"

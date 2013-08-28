@@ -37,7 +37,7 @@ void test_mlr (bool verbose)
         for (size_t j = 0; j < x.cols (); ++j)
             y (i, 0) += x (i, j) * b[j] + 0.05 * e (i, j);
     // Try to recover b
-    matrix bhat = mlr (y, x);
+    matrix bhat = mlr_inverse (y, x);
     if (verbose)
     {
         for (auto i : b) cout << " " << i;
