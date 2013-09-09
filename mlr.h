@@ -95,6 +95,7 @@ namespace horny_toad
     T mlr (const T &y, const T &x)
     {
         return mlr_inverse (y, x);
+        //return mlr_lapack (y, x);
     }
 } // namespace horny_toad
 
