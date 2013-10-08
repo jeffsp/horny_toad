@@ -34,8 +34,13 @@ void test_mlr (bool verbose)
     matrix y (N, 1);
     // y = x * b + e
     for (size_t i = 0; i < x.rows (); ++i)
+    {
+        // get the responses plus added noise
         for (size_t j = 0; j < x.cols (); ++j)
             y (i, 0) += x (i, j) * b[j] + 0.05 * e (i, j);
+        // add an offset
+        y (i, 0) += 42.0;
+    }
     // Try to recover b
     matrix bhat = mlr_inverse (y, x);
     if (verbose)
@@ -45,8 +50,10 @@ void test_mlr (bool verbose)
         for (auto i : bhat) cout << " " << i;
         cout << endl;
     }
-    for (size_t i = 0; i < bhat.size (); ++i)
-        VERIFY (about_equal (b[i], bhat[i]));
+    // the offset is in the first term
+    VERIFY (about_equal (42.0, bhat[0], 0.01));
+    for (size_t i = 1; i < bhat.size (); ++i)
+        VERIFY (about_equal (b[i - 1], bhat[i]));
     // Try to recover b, with lapack version
     bhat = mlr_lapack (y, x);
     if (verbose)
@@ -56,8 +63,9 @@ void test_mlr (bool verbose)
         for (auto i : bhat) cout << " " << i;
         cout << endl;
     }
-    for (size_t i = 0; i < bhat.size (); ++i)
-        VERIFY (about_equal (b[i], bhat[i]));
+    VERIFY (about_equal (42.0, bhat[0], 0.01));
+    for (size_t i = 1; i < bhat.size (); ++i)
+        VERIFY (about_equal (b[i - 1], bhat[i]));
 }
 
 int main (int argc, char **)
