@@ -54,6 +54,7 @@ void test_mlr (bool verbose)
     VERIFY (about_equal (42.0, bhat[0], 0.01));
     for (size_t i = 1; i < bhat.size (); ++i)
         VERIFY (about_equal (b[i - 1], bhat[i]));
+    /*
     // Try to recover b, with lapack version
     bhat = mlr_lapack (y, x);
     if (verbose)
@@ -66,6 +67,7 @@ void test_mlr (bool verbose)
     VERIFY (about_equal (42.0, bhat[0], 0.01));
     for (size_t i = 1; i < bhat.size (); ++i)
         VERIFY (about_equal (b[i - 1], bhat[i]));
+    */
 }
 
 int main (int argc, char **)
