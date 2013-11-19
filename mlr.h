@@ -8,7 +8,7 @@
 #define MLR_H
 
 #include "raster_utils.h"
-#include <lapacke.h>
+//#include <lapacke.h>
 
 namespace horny_toad
 {
@@ -65,6 +65,7 @@ namespace horny_toad
     /// @param x predictors
     ///
     /// @return linear estimates of y=b*x
+    /*
     template<typename T>
     T mlr_lapack (const T &y, const T &x)
     {
@@ -93,6 +94,7 @@ namespace horny_toad
             z[i] = b[i];
         return z;
     }
+    */
 
     /// @brief multiple linear regression
     ///
