@@ -378,7 +378,6 @@ inline void reduce3x3 (const Src &src, Dest &dest)
     assert (src.cols () > 1);
     assert (dest.rows () > 0);
     assert (dest.cols () > 0);
-    typedef typename Src::value_type SrcT;
     typedef typename Dest::value_type DestT;
     for (size_t y = 0; y < src.rows () - 2; y += 2)
     {
