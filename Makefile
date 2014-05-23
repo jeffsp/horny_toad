@@ -29,6 +29,6 @@ doc:
 release:
 	$(MAKE) QFLAGS=\"CONFIG+=release\"
 
-install: release check
+install: release
 	sudo mkdir -p /usr/local/include/horny_toad
 	sudo cp -a *.h *.hpp /usr/local/include/horny_toad
