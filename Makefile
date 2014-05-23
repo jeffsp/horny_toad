@@ -31,4 +31,4 @@ release:
 
 install: release check
 	sudo mkdir -p /usr/local/include/horny_toad
-	sudo cp -a  *.h /usr/local/include/horny_toad
+	sudo cp -a *.h *.hpp /usr/local/include/horny_toad
