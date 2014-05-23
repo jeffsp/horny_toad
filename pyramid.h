@@ -7,7 +7,7 @@
 #ifndef PYRAMID_H
 #define PYRAMID_H
 
-#include "raster.h"
+#include "jack_rabbit/raster.h"
 #include <algorithm>
 #include <cassert>
 #include <cmath>
@@ -197,9 +197,6 @@ namespace horny_toad
 /// This example generates multiresolution noise.
 /// \image html pyramid_example1_color.png "pyramid example1 color output"
 /// \image html pyramid_example1_grayscale.png "pyramid example1 grayscale output"
-
-/// \example test_pyramid.cc
-/// Pyramid test suite
 
 /// @brief Reduce using a 2x2 filter kernel
 /// @param src source image
