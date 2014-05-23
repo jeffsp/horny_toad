@@ -4,8 +4,8 @@
 /// @version 1.0
 /// @date 2013-01-14
 
-#include "verify.h"
-#include "color.h"
+#include "horny_toad/verify.h"
+#include "horny_toad/color.h"
 #include <cmath>
 #include <iostream>
 #include <stdexcept>

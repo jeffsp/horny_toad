@@ -4,11 +4,11 @@
 /// @version 1.0
 /// @date 2013-01-14
 
-#include "about_equal.h"
-#include "raster.h"
-#include "raster_utils.h"
-#include "subscript_function.h"
-#include "verify.h"
+#include "horny_toad/about_equal.h"
+#include "jack_rabbit/raster.h"
+#include "horny_toad/raster_utils.h"
+#include "jack_rabbit/subscript_function.h"
+#include "horny_toad/verify.h"
 #include <numeric>
 #include <boost/lambda/lambda.hpp>
 #include <boost/random/uniform_01.hpp>

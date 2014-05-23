@@ -4,8 +4,8 @@
 /// @version 1.0
 /// @date 2013-03-18
 
-#include "verify.h"
-#include "tracer.h"
+#include "horny_toad/verify.h"
+#include "horny_toad/tracer.h"
 #include <iostream>
 #include <stdexcept>
 #include <sstream>

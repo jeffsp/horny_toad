@@ -4,9 +4,9 @@
 /// @version 1.0
 /// @date 2013-01-14
 
-#include "about_equal.h"
-#include "statistics.h"
-#include "verify.h"
+#include "horny_toad/about_equal.h"
+#include "horny_toad/statistics.h"
+#include "horny_toad/verify.h"
 #include <iostream>
 #include <vector>
 

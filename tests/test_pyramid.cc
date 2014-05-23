@@ -4,8 +4,8 @@
 /// @version 1.0
 /// @date 2013-01-14
 
-#include "verify.h"
-#include "pyramid.h"
+#include "horny_toad/verify.h"
+#include "horny_toad/pyramid.h"
 #include <algorithm>
 #include <fstream>
 #include <functional>

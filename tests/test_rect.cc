@@ -4,8 +4,8 @@
 /// @version 1.0
 /// @date 2013-01-14
 
-#include "rect.h"
-#include "verify.h"
+#include "horny_toad/rect.h"
+#include "horny_toad/verify.h"
 #include <iostream>
 #include <stdexcept>
 

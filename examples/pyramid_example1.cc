@@ -20,7 +20,7 @@
 //
 // contact: jeffsp@gmail.com
 
-#include "pyramid.h"
+#include "horny_toad/pyramid.h"
 #include <cstdlib>
 #include <fstream>
 #include <iostream>

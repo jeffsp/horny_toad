@@ -6,8 +6,8 @@
 //
 // contact: jeffsp@gmail.com
 
-#include "horny_toad.h"
-#include "jack_rabbit.h"
+#include "horny_toad/horny_toad.h"
+#include "jack_rabbit/jack_rabbit.h"
 #include <cmath>
 #include <iostream>
 

@@ -4,12 +4,12 @@
 /// @version 1.0
 /// @date 2013-01-14
 
-#include "about_equal.h"
-#include "bicubic.h"
-#include "raster.h"
-#include "raster_utils.h"
-#include "subscript_function.h"
-#include "verify.h"
+#include "horny_toad/about_equal.h"
+#include "horny_toad/bicubic.h"
+#include "jack_rabbit/raster.h"
+#include "horny_toad/raster_utils.h"
+#include "jack_rabbit/subscript_function.h"
+#include "horny_toad/verify.h"
 #include <iostream>
 
 using namespace std;

@@ -4,8 +4,8 @@
 /// @version 1.0
 /// @date 2013-01-14
 
-#include "foveator.h"
-#include "verify.h"
+#include "horny_toad/foveator.h"
+#include "horny_toad/verify.h"
 #include <algorithm>
 #include <iomanip>
 #include <iostream>

@@ -4,9 +4,9 @@
 /// @version 1.0
 /// @date 2013-01-14
 
-#include "about_equal.h"
-#include "log2.h"
-#include "verify.h"
+#include "horny_toad/about_equal.h"
+#include "horny_toad/log2.h"
+#include "horny_toad/verify.h"
 #include <iostream>
 
 using namespace std;

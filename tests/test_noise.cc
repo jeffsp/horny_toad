@@ -4,10 +4,10 @@
 /// @version 1.0
 /// @date 2013-01-15
 
-#include "about_equal.h"
-#include "noise.h"
-#include "statistics.h"
-#include "verify.h"
+#include "horny_toad/about_equal.h"
+#include "horny_toad/noise.h"
+#include "horny_toad/statistics.h"
+#include "horny_toad/verify.h"
 
 using namespace std;
 using namespace horny_toad;

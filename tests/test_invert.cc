@@ -4,7 +4,7 @@
 /// @version 1.0
 /// @date 2013-06-12
 
-#include "horny_toad.h"
+#include "horny_toad/horny_toad.h"
 #include <iostream>
 
 using namespace std;

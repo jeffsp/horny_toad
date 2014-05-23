@@ -4,8 +4,8 @@
 /// @version 1.0
 /// @date 2013-01-14
 
-#include "timer.h"
-#include "verify.h"
+#include "horny_toad/timer.h"
+#include "horny_toad/verify.h"
 #include <boost/lambda/lambda.hpp>
 #include <boost/random.hpp>
 #include <fstream>

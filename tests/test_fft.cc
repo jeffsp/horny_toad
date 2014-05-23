@@ -4,8 +4,8 @@
 /// @version 1.0
 /// @date 2013-01-14
 
-#include "fft.h"
-#include "verify.h"
+#include "horny_toad/fft.h"
+#include "horny_toad/verify.h"
 #include <iostream>
 #include <iterator>
 #include <vector>

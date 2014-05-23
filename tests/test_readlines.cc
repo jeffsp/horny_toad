@@ -6,8 +6,8 @@
 
 #include <iostream>
 #include <sstream>
-#include "readlines.h"
-#include "verify.h"
+#include "horny_toad/readlines.h"
+#include "horny_toad/verify.h"
 
 using namespace std;
 using namespace horny_toad;

@@ -4,9 +4,9 @@
 /// @version 1.0
 /// @date 2013-01-14
 
-#include "blending_map.h"
-#include "raster.h"
-#include "verify.h"
+#include "horny_toad/blending_map.h"
+#include "jack_rabbit/raster.h"
+#include "horny_toad/verify.h"
 #include <iostream>
 #include <iomanip>
 #include <stdexcept>

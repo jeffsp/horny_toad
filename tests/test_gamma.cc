@@ -4,8 +4,8 @@
 /// @version 1.0
 /// @date 2013-01-14
 
-#include "gamma.h"
-#include "verify.h"
+#include "horny_toad/gamma.h"
+#include "horny_toad/verify.h"
 #include <iostream>
 
 using namespace std;

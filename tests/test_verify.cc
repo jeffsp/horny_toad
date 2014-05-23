@@ -4,7 +4,7 @@
 /// @version 1.0
 /// @date 2013-01-14
 
-#include "verify.h"
+#include "horny_toad/verify.h"
 #include <fstream>
 #include <iostream>
 #include <numeric>

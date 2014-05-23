@@ -4,10 +4,10 @@
 /// @version 1.0
 /// @date 2013-01-14
 
-#include "about_equal.h"
-#include "pi.h"
-#include "polar.h"
-#include "verify.h"
+#include "horny_toad/about_equal.h"
+#include "horny_toad/pi.h"
+#include "horny_toad/polar.h"
+#include "horny_toad/verify.h"
 #include <iostream>
 #include <vector>
 
