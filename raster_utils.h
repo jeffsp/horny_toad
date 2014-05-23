@@ -8,10 +8,12 @@
 #define RASTER_UTILS_H
 
 #include "pi.h"
+#include "pnm.h"
 #include <algorithm>
 #include <cassert>
 #include <cstdlib>
 #include <cmath>
+#include <fstream>
 #include <iomanip>
 #include <iostream>
 #include <numeric>
@@ -851,6 +853,232 @@ void transform3 (SrcIter a_beg,
 {
     for (; a_beg != a_end; )
         *dest++ = op (*a_beg++, *b_beg++, *c_beg++);
+}
+
+/// @brief read a grayscale pnm
+///
+/// @param ifs input stream
+///
+/// @return the image
+jack_rabbit::raster<unsigned char> read_grayscale (std::istream &ifs)
+{
+    bool rgb, bpp16;
+    size_t w, h;
+    horny_toad::read_pnm_header (ifs, rgb, bpp16, w, h);
+    if (rgb)
+        throw std::runtime_error ("the file is not grayscale");
+    if (bpp16)
+        throw std::runtime_error ("the file is not 8 bit");
+    jack_rabbit::raster<unsigned char> p (h, w);
+    horny_toad::read_pnm_pixels (ifs, p);
+    return p;
+}
+
+/// @brief read a grayscale image
+///
+/// @param fn image name
+///
+/// @return the image
+jack_rabbit::raster<unsigned char> read_grayscale (const char *fn)
+{
+    std::ifstream ifs (fn);
+    if (!ifs)
+        throw std::runtime_error ("could not open file for reading");
+    return read_grayscale (ifs);
+}
+
+/// @brief read a 16-bit grayscale
+///
+/// @param ifs input stream
+///
+/// @return the image
+jack_rabbit::raster<unsigned short> read_grayscale16 (std::istream &ifs)
+{
+    bool rgb, bpp16;
+    size_t w, h;
+    horny_toad::read_pnm_header (ifs, rgb, bpp16, w, h);
+    if (rgb)
+        throw std::runtime_error ("the file is not grayscale");
+    if (!bpp16)
+        throw std::runtime_error ("the file is not 16 bit");
+    jack_rabbit::raster<unsigned short> p (h, w);
+    horny_toad::read_pnm_pixels16 (ifs, p);
+    return p;
+}
+
+/// @brief read a 16-bit grayscale
+///
+/// @param fn input filename
+///
+/// @return the image
+jack_rabbit::raster<unsigned short> read_grayscale16 (const char *fn)
+{
+    std::ifstream ifs (fn);
+    if (!ifs)
+        throw std::runtime_error ("could not open file for reading");
+    return read_grayscale16 (ifs);
+}
+
+/// @brief check if file is rgb
+///
+/// @param fn filename
+///
+/// @return true if it's rgb
+bool is_rgb (const char *fn)
+{
+    std::ifstream ifs (fn);
+    if (!ifs)
+        throw std::runtime_error ("could not open file for reading");
+    bool rgb, bpp16;
+    size_t w, h;
+    horny_toad::read_pnm_header (ifs, rgb, bpp16, w, h);
+    return rgb;
+}
+
+/// @brief check if a file is 16-bit
+///
+/// @param fn filename
+///
+/// @return true if it's 16-bit
+bool is_bpp16 (const char *fn)
+{
+    std::ifstream ifs (fn);
+    if (!ifs)
+        throw std::runtime_error ("could not open file for reading");
+    bool rgb, bpp16;
+    size_t w, h;
+    horny_toad::read_pnm_header (ifs, rgb, bpp16, w, h);
+    return bpp16;
+}
+
+/// @brief read rgb image planes
+///
+/// @param ifs input file stream
+///
+/// @return the image
+std::vector<jack_rabbit::raster<unsigned char>> read_planes (std::istream &ifs)
+{
+    if (!ifs)
+        throw std::runtime_error ("error reading from file");
+    bool rgb, bpp16;
+    size_t w, h;
+    horny_toad::read_pnm_header (ifs, rgb, bpp16, w, h);
+    if (bpp16)
+        throw std::runtime_error ("the file is not 8 bit");
+    std::vector<jack_rabbit::raster<unsigned char>> r;
+    if (rgb)
+    {
+        jack_rabbit::raster<unsigned char> p (h, w * 3);
+        horny_toad::read_pnm_pixels (ifs, p);
+        r.resize (3);
+        r[0].resize (h, w);
+        r[1].resize (h, w);
+        r[2].resize (h, w);
+        horny_toad::split3 (p.begin (), p.end (), r[0].begin (), r[1].begin (), r[2].begin ());
+    }
+    else
+    {
+        r.resize (1);
+        r[0].resize (h, w);
+        horny_toad::read_pnm_pixels (ifs, r[0]);
+    }
+    return r;
+}
+
+/// @brief read rgb image planes
+///
+/// @param fn the input filename
+///
+/// @return the image
+std::vector<jack_rabbit::raster<unsigned char>> read_planes (const char *fn)
+{
+    std::ifstream ifs (fn);
+    if (!ifs)
+        throw std::runtime_error ("could not open file for reading");
+    return read_planes (ifs);
+}
+
+/// @brief read an rgb image
+///
+/// @param ifs input stream
+///
+/// @return the image
+jack_rabbit::raster<unsigned char> read_rgb (std::istream &ifs)
+{
+    if (!ifs)
+        throw std::runtime_error ("error reading from file");
+    bool rgb, bpp16;
+    size_t w, h;
+    horny_toad::read_pnm_header (ifs, rgb, bpp16, w, h);
+    if (!rgb)
+        throw std::runtime_error ("the file is not rgb");
+    if (bpp16)
+        throw std::runtime_error ("the file is not 8 bit");
+    jack_rabbit::raster<unsigned char> p (h, w * 3);
+    horny_toad::read_pnm_pixels (ifs, p);
+    return p;
+}
+
+/// @brief read an rgb iamge
+///
+/// @param fn image filename
+///
+/// @return the image
+jack_rabbit::raster<unsigned char> read_rgb (const char *fn)
+{
+    std::ifstream ifs (fn);
+    if (!ifs)
+        throw std::runtime_error ("could not open file for reading");
+    return read_rgb (ifs);
+}
+
+/// @brief read a 16-bit image
+///
+/// @param ifs input stream
+///
+/// @return the image
+jack_rabbit::raster<unsigned short> read_rgb16 (std::istream &ifs)
+{
+    if (!ifs)
+        throw std::runtime_error ("error reading from file");
+    bool rgb, bpp16;
+    size_t w, h;
+    horny_toad::read_pnm_header (ifs, rgb, bpp16, w, h);
+    if (!rgb)
+        throw std::runtime_error ("the file is not rgb");
+    if (!bpp16)
+        throw std::runtime_error ("the file is not 16 bit");
+    jack_rabbit::raster<unsigned short> p (h, w * 3);
+    horny_toad::read_pnm_pixels16 (ifs, p);
+    return p;
+}
+
+/// @brief read a 16-bit image
+///
+/// @param fn image filename
+///
+/// @return the image
+jack_rabbit::raster<unsigned short> read_rgb16 (const char *fn)
+{
+    std::ifstream ifs (fn);
+    if (!ifs)
+        throw std::runtime_error ("could not open file for reading");
+    return read_rgb16 (ifs);
+}
+
+/// @brief read an image from a file
+///
+/// @param fn the filename
+///
+/// @return the image
+jack_rabbit::raster<unsigned char> read (const char *fn)
+{
+    jack_rabbit::raster<unsigned char> p;
+    if (!is_rgb (fn))
+        p = read_grayscale (fn);
+    else
+        p = read_rgb (fn);
+    return p;
 }
 
 } // namespace horny_toad
