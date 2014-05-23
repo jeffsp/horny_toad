@@ -1,14 +1,15 @@
 # Horny Toad Examples Makefile
+#
 # jsp Fri Feb  6 17:13:07 CST 2009
 
 CCFILES=$(shell ls -1 *.cc)
 TARGETS=$(basename $(CCFILES))
-INCLUDEPATH=.. ../../jack_rabbit
-DEPENDPATH=.. ../../jack_rabbit
+INCLUDEPATH=/home/jsp/Projects
+DEPENDPATH=/home/jsp/Projects
 EXTRA_SOURCES=
 LIBS=-lfftw3 -lgomp
 
-include ../../Makefile.examples
+include /home/jsp/Projects/Makefile.examples
 
 run: all
 	./bicubic_example > tmp.pgm
